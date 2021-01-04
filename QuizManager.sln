@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizManager.Web", "QuizManager.Web\QuizManager.Web.csproj", "{A5B67243-D7D0-4448-87A1-DAC4FB8EB2E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizManager.Web", "QuizManager.Web\QuizManager.Web.csproj", "{A5B67243-D7D0-4448-87A1-DAC4FB8EB2E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizManager.DataAccess", "QuizManager.DataAccess\QuizManager.DataAccess.csproj", "{1932C13A-D5ED-4351-9468-744120101347}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizManager.DataAccess", "QuizManager.DataAccess\QuizManager.DataAccess.csproj", "{60709FE0-0B76-454D-BA91-51349DF8034B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{A5B67243-D7D0-4448-87A1-DAC4FB8EB2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5B67243-D7D0-4448-87A1-DAC4FB8EB2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5B67243-D7D0-4448-87A1-DAC4FB8EB2E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1932C13A-D5ED-4351-9468-744120101347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1932C13A-D5ED-4351-9468-744120101347}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1932C13A-D5ED-4351-9468-744120101347}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1932C13A-D5ED-4351-9468-744120101347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60709FE0-0B76-454D-BA91-51349DF8034B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60709FE0-0B76-454D-BA91-51349DF8034B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60709FE0-0B76-454D-BA91-51349DF8034B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60709FE0-0B76-454D-BA91-51349DF8034B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
