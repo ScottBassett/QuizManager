@@ -8,5 +8,7 @@ namespace QuizManager.DataAccess.Models
         public int Id { get; set; }
 
         public string AnswerName { get; set; }
+
+        public int QuestionId { get; set; }
     }
 }
