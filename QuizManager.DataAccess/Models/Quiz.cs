@@ -9,10 +9,9 @@ namespace QuizManager.DataAccess.Models
         public int Id { get; set; }
 
         [Required]
-        [Display (Name = "Quiz Name")]
+        [Display(Name = "Quiz Name")]
         public string QuizName { get; set; }
 
-        [Required]
         public virtual List<Question> Questions { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuizManager.DataAccess.Models.Question>
+﻿@model QuizManager.Web.ViewModels.QuestionsAnswersViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,22 +13,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.QuestionName)
+                @Html.DisplayNameFor(model => model.Questions.FirstOrDefault().QuestionName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CorrectAnswerId)
+                @Html.DisplayNameFor(model => model.Answers.FirstOrDefault().AnswerName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Questions) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.QuestionName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CorrectAnswerId)
+                @Html.DisplayFor(modelItem => item.AllAnswers.FirstOrDefault(x => x.Id == item.CorrectAnswerId).AnswerName)
             </td>
 
             <td>

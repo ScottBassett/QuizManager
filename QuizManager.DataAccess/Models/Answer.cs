@@ -7,6 +7,7 @@ namespace QuizManager.DataAccess.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name = "Answer")]
         public string AnswerName { get; set; }
 
         public int QuestionId { get; set; }

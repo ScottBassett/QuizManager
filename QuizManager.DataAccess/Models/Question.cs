@@ -11,7 +11,7 @@ namespace QuizManager.DataAccess.Models
         public int QuizId { get; set; }
 
         [Required]
-        [Display (Name = "Question Name")]
+        [Display (Name = "Question")]
         public string QuestionName { get; set; }
 
         [Required]

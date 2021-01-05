@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess;
 using QuizManager.DataAccess.Models;
+using QuizManager.Web.ViewModels;
 
 namespace QuizManager.Web.Controllers
 {
@@ -20,9 +18,14 @@ namespace QuizManager.Web.Controllers
         }
 
         // GET: Questions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            return View(await _context.Questions.ToListAsync());
+            var questionsAnswersViewModel = new QuestionsAnswersViewModel
+            {
+                Answers = await _context.Answers.ToListAsync(),
+                Questions = await _context.Questions.ToListAsync()
+            };
+            return View(questionsAnswersViewModel);
         }
 
         // GET: Questions/Details/5

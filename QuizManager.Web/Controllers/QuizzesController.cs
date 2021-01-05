@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess;
 using QuizManager.DataAccess.Models;
+using QuizManager.Web.ViewModels;
 
 namespace QuizManager.Web.Controllers
 {
@@ -33,14 +31,14 @@ namespace QuizManager.Web.Controllers
                 return NotFound();
             }
 
-            var quiz = await _context.Quizzes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (quiz == null)
+            var quizDetailsViewModel = new QuizDetailsViewModel
             {
-                return NotFound();
-            }
+                Quiz = await _context.Quizzes.FirstOrDefaultAsync(m => m.Id == id),
+                Questions = _context.Questions.Where(x => x.QuizId == id)
+            };
 
-            return View(quiz);
+
+            return View(quizDetailsViewModel);
         }
 
         // GET: Quizzes/Create
