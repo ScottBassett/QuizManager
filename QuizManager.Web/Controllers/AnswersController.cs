@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess;
 using QuizManager.DataAccess.Models;
@@ -43,15 +44,14 @@ namespace QuizManager.Web.Controllers
         // GET: Answers/Create
         public IActionResult Create()
         {
+            ViewData["Question"] = new SelectList(_context.Questions, "Id", "QuestionName");
             return View();
         }
 
         // POST: Answers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AnswerName")] Answer answer)
+        public async Task<IActionResult> Create([Bind("Id,AnswerName, QuestionId")] Answer answer)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +59,7 @@ namespace QuizManager.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(answer);
         }
 
@@ -79,8 +80,6 @@ namespace QuizManager.Web.Controllers
         }
 
         // POST: Answers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AnswerName")] Answer answer)

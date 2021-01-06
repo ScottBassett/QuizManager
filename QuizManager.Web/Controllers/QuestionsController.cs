@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess;
 using QuizManager.DataAccess.Models;
@@ -18,32 +19,27 @@ namespace QuizManager.Web.Controllers
         }
 
         // GET: Questions
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
-            var questionsAnswersViewModel = new QuestionsAnswersViewModel
-            {
-                Answers = await _context.Answers.ToListAsync(),
-                Questions = await _context.Questions.ToListAsync()
-            };
-            return View(questionsAnswersViewModel);
+            return View(await _context.Questions.ToListAsync());
         }
 
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var question = await _context.Questions
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (question == null)
+            var question = await _context.Questions.FirstOrDefaultAsync(m => m.Id == id);
+            var answer = await _context.Answers.FirstOrDefaultAsync(x => x.Id == question.CorrectAnswerId);
+
+            var questionDetailsViewModel = new QuestionDetailsViewModel
             {
-                return NotFound();
-            }
+                Question = question,
+                Answer = answer
+            };
 
-            return View(question);
+            return View(questionDetailsViewModel);
         }
 
         // GET: Questions/Create
@@ -65,6 +61,7 @@ namespace QuizManager.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(question);
         }
 
