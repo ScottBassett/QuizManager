@@ -18,11 +18,43 @@
                 <select asp-for="QuestionId" class="form-control" asp-items="ViewBag.Question" style="width:auto;"></select>
                 <span asp-validation-for="QuestionId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="AnswerName" class="control-label"></label>
                 <input asp-for="AnswerName" class="form-control" />
                 <span asp-validation-for="AnswerName" class="text-danger"></span>
+                <label for="answer1">Correct answer?</label>
+                <input type="radio" id="answer1" name="correctAnswerId" value="Correct answer?">
             </div>
+            
+            <div class="form-group">
+                <label asp-for="AnswerName" class="control-label"></label>
+                <input asp-for="AnswerName" class="form-control" />
+                <span asp-validation-for="AnswerName" class="text-danger"></span>
+                <label for="answer2">Correct answer?</label>
+                <input type="radio" id="answer2" name="correctAnswerId" value="Correct answer?">
+
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="AnswerName" class="control-label"></label>
+                <input asp-for="AnswerName" class="form-control" />
+                <span asp-validation-for="AnswerName" class="text-danger"></span>
+
+                <label for="answer3">Correct answer?</label>
+                <input type="radio" id="answer3" name="correctAnswerId" value="Correct answer?">
+
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="AnswerName" class="control-label"></label>
+                <input asp-for="AnswerName" class="form-control" />
+                <span asp-validation-for="AnswerName" class="text-danger"></span>
+                <label for="answer4">Correct answer?</label>
+                <input type="radio" id="answer4" name="correctAnswerId" value="Correct answer?">
+
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

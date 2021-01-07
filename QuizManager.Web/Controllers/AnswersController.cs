@@ -44,7 +44,7 @@ namespace QuizManager.Web.Controllers
         // GET: Answers/Create
         public IActionResult Create()
         {
-            ViewData["Question"] = new SelectList(_context.Questions, "Id", "QuestionName");
+            ViewData["Question"] = new SelectList(_context.Questions, "Id", "QuestionName", TempData ["questionId"]);
             return View();
         }
 
@@ -57,6 +57,8 @@ namespace QuizManager.Web.Controllers
             {
                 _context.Add(answer);
                 await _context.SaveChangesAsync();
+
+
                 return RedirectToAction(nameof(Index));
             }
             
