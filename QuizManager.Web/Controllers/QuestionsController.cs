@@ -31,12 +31,13 @@ namespace QuizManager.Web.Controllers
                 return NotFound();
 
             var question = await _context.Questions.FirstOrDefaultAsync(m => m.Id == id);
-            var answer = await _context.Answers.FirstOrDefaultAsync(x => x.Id == question.CorrectAnswerId);
+            // var answer = await _context.Answers.FirstOrDefaultAsync(x => x.Id == question.CorrectAnswerId);
+            var answers =  _context.Answers.Where(x => x.QuestionId == question.Id);
 
             var questionDetailsViewModel = new QuestionDetailsViewModel
             {
                 Question = question,
-                Answer = answer
+                Answers = answers
             };
 
             return View(questionDetailsViewModel);

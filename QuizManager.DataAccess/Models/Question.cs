@@ -14,8 +14,6 @@ namespace QuizManager.DataAccess.Models
         [Display (Name = "Question")]
         public string QuestionName { get; set; }
 
-        public int CorrectAnswerId { get; set; }
-
         public virtual List<Answer> AllAnswers { get; set; }
     }
 }

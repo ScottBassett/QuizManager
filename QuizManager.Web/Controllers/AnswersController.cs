@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess;
 using QuizManager.DataAccess.Models;
+using QuizManager.Web.ViewModels;
 
 namespace QuizManager.Web.Controllers
 {
@@ -51,18 +53,22 @@ namespace QuizManager.Web.Controllers
         // POST: Answers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AnswerName, QuestionId")] Answer answer)
+        public async Task<IActionResult> Create(CreateAnswersViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(answer);
-                await _context.SaveChangesAsync();
+                foreach (var answer in model.Answers)
+                {
+                    answer.QuestionId = model.QuestionId;
+                }
 
+                await _context.AddRangeAsync(model.Answers);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
             
-            return View(answer);
+            return View(model);
         }
 
         // GET: Answers/Edit/5

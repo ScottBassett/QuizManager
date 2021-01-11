@@ -8,7 +8,7 @@
 <h1>@Model.Quiz.QuizName Quiz</h1>
 
 <div>
-    
+
 
     <dl class="row">
         <dt class="col-sm-2"> Questions </dt>
@@ -20,7 +20,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => question.QuestionName)
+                    <a asp-controller="Questions" asp-action="Details" asp-route-id="@question.Id">@Html.DisplayFor(modelItem => question.QuestionName)</a>
                 </td>
             </tr>
         }

@@ -11,5 +11,7 @@ namespace QuizManager.DataAccess.Models
         public string AnswerName { get; set; }
 
         public int QuestionId { get; set; }
+
+        public bool IsCorrect { get; set; }
     }
 }

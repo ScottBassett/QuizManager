@@ -11,19 +11,31 @@
     <h4>Question</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Question.QuestionName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Question.QuestionName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Answer.AnswerName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Answer.AnswerName)
-        </dd>
     </dl>
+
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-2"> Answers </dt>
+    </dl>
+
+    <table class="table">
+
+        @foreach (var answer in Model.Answers)
+        {
+            <tr>
+                <td>
+                     @Html.DisplayFor(modelItem => answer.AnswerName)
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Question.Id">Edit</a> |
