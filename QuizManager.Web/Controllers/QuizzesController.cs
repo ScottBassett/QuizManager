@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -32,10 +33,15 @@ namespace QuizManager.Web.Controllers
                 return NotFound();
             }
 
+            var quiz = await _context.Quizzes.FirstOrDefaultAsync(q => q.Id == id);
+            var questions = _context.Questions
+                .Where(x => x.QuizId == id)
+                .Include(x => x.AllAnswers);
+
             var quizDetailsViewModel = new QuizDetailsViewModel
             {
-                Quiz = await _context.Quizzes.FirstOrDefaultAsync(m => m.Id == id),
-                Questions = _context.Questions.Where(x => x.QuizId == id)
+                Quiz = quiz,
+                Questions = questions,
             };
 
 
