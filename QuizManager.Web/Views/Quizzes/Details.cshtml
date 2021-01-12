@@ -30,6 +30,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => answer.AnswerName)
                     </td>
+                    <td>
+                        @Html.RadioButtonFor(modelItem => answer.IsCorrect, "true")
+                    </td>
                 </tr>
             }
         }

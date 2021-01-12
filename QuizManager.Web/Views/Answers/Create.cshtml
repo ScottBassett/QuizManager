@@ -1,5 +1,4 @@
-﻿@using System.Linq
-@model CreateAnswersViewModel
+﻿@model CreateAnswersViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -21,17 +20,24 @@
 
             @for (var i = 0; i < 4; i++)
             {
-                <div class="form-group">
-                    <label asp-for="Answers[i].AnswerName" class="control-label"></label>
-                    <input asp-for="Answers[i].AnswerName" class="form-control" />
-                    <span asp-validation-for="Answers[i].AnswerName" class="text-danger"></span>
-                    <label asp-for="Answers[i].IsCorrect">Correct answer?</label>
-                    <input asp-for="Answers[i].IsCorrect" value="true" type="radio" name="isCorrect">
-                    <span asp-validation-for="Answers[i].IsCorrect" class="text-danger"></span>
-                    @*<label name="isCorrect">@Html.RadioButtonFor(x => x.Answers[i].IsCorrect, "true") Correct Answer?</label>*@
-                    @*<label>@Html.RadioButtonFor(x => x.Answers[i].IsCorrect, "false") NO</label>*@
-                </div>
+        <div class="form-group">
+            <label asp-for="Answers[i].AnswerName" class="control-label"></label>
+            <input asp-for="Answers[i].AnswerName" class="form-control" />
+            <span asp-validation-for="Answers[i].AnswerName" class="text-danger"></span>
+            <label asp-for="Answers[i].IsCorrect" class="control-label">Correct Answer?</label>
+            <input type="checkbox"
+                   onchange=check(this)
+                   name="correct-answer-checkbox"
+                   value="true"
+                   asp-for="Answers[i].IsCorrect"><br>
+            @*@Html.CheckBoxFor(x => x.Answers[i].IsCorrect)*@
+        </div>
             }
+
+            @*<h1>Radio button like Checkboxes</h1>
+            <input type="checkbox" onchange=check(this) id="city1" name="city" value="Hyderabad">Hyderabad<br>  
+            <input type="checkbox" onchange=check(this) id="city2" name="city" value="Mumbai">Mumbai<br>  
+            <input type="checkbox" onchange=check(this) id="city3" name="city" value="Delhi">Delhi*@  
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -45,5 +51,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/site.js"></script>
 }
