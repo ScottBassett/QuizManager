@@ -25,11 +25,7 @@
             <input asp-for="Answers[i].AnswerName" class="form-control" />
             <span asp-validation-for="Answers[i].AnswerName" class="text-danger"></span>
             <label asp-for="Answers[i].IsCorrect" class="control-label">Correct Answer?</label>
-            <input type="checkbox"
-                   onchange=check(this)
-                   name="correct-answer-checkbox"
-                   value="true"
-                   asp-for="Answers[i].IsCorrect"><br>
+            <input asp-for="Answers[i].IsCorrect" class="correct-answer-checkbox" onchange=check(this) type="checkbox"><br>
             @*@Html.CheckBoxFor(x => x.Answers[i].IsCorrect)*@
         </div>
             }
