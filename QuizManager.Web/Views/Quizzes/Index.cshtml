@@ -1,29 +1,37 @@
 ﻿@model IEnumerable<QuizManager.DataAccess.Models.Quiz>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quizzes";
 }
 
-<h1>Index</h1>
+<h1>Quizzes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-outline-primary" asp-action="Create">Create New Quiz</a>
 </p>
 <table class="table">
-    <thead>
+    @*<thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.QuizName)
             </th>
             <th></th>
         </tr>
-    </thead>
+    </thead>*@
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.QuizName)
             </td>
+
+            @* IF USER *@
+            <td>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">View Questions</a>
+                <a class="btn btn-success" asp-action="PlayQuiz" asp-route-id="@item.Id">Play Quiz</a>
+            </td>
+
+            @* IF ADMIN *@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

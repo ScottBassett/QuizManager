@@ -1,28 +1,14 @@
-﻿@*@model QuizManager.DataAccess.Models.Question*@
-@model QuestionDetailsViewModel
+﻿@model QuestionDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
 <div>
-    <h4>Question</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Question.QuestionName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Question.QuestionName)
-        </dd>
-    </dl>
-
-    <hr />
+    <h1>@Html.DisplayFor(model => model.Question.QuestionName)</h1>
+    <br />
 
     <dl class="row">
-        <dt class="col-sm-2"> Answers </dt>
+        <dt class="col-sm-2">Possible Answers</dt>
     </dl>
 
     <table class="table">
@@ -31,11 +17,18 @@
         {
             <tr>
                 <td>
-                     @Html.DisplayFor(modelItem => answer.AnswerName)
+                    @Html.DisplayFor(modelItem => answer.AnswerName)
                 </td>
             </tr>
         }
     </table>
+
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-2">Correct Answer</dt>
+    </dl>
+    <p>@Html.DisplayFor(model => model.Answers.FirstOrDefault(x => x.IsCorrect).AnswerName)</p>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Question.Id">Edit</a> |

@@ -1,7 +1,9 @@
-﻿@model QuizDetailsViewModel
+﻿@model PlayQuizViewModel
 
 @{
     ViewData["Title"] = "Details";
+    //var playerScore = 12;
+    var playerGuess = false;
 }
 
 <h1>@Model.Quiz.QuizName Quiz</h1>
@@ -23,17 +25,14 @@
                 </td>
             </tr>
 
-            <tr>
-                <td>
-                    <h5>Answers</h5>
-                </td>
-            </tr>
-
             @foreach (var answer in question.AllAnswers)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => answer.AnswerName)
+                    </td>
+                    <td>
+                        @Html.RadioButtonFor(modelItem => answer.IsCorrect, "true")
                     </td>
                 </tr>
             }
@@ -42,7 +41,10 @@
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-controller="Questions" asp-action="Create">Add Question</a>
+    <a class="btn btn-success" asp-controller="" asp-action="">Finish Quiz</a>
+    @*<a class="btn btn-dark" asp-controller="Quizzes" asp-action="IncreaseScore">Increase score</a>*@
+    <button class="btn btn-dark" onclick="IncreaseScore()">Increase score</button>
+    Your score:
 </div>
 
 <br/>

@@ -1,7 +1,7 @@
 ﻿@model CreateAnswersViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Answers";
 }
 
 <h1>Create</h1>
@@ -26,14 +26,8 @@
             <span asp-validation-for="Answers[i].AnswerName" class="text-danger"></span>
             <label asp-for="Answers[i].IsCorrect" class="control-label">Correct Answer?</label>
             <input asp-for="Answers[i].IsCorrect" class="correct-answer-checkbox" onchange=check(this) type="checkbox"><br>
-            @*@Html.CheckBoxFor(x => x.Answers[i].IsCorrect)*@
         </div>
             }
-
-            @*<h1>Radio button like Checkboxes</h1>
-            <input type="checkbox" onchange=check(this) id="city1" name="city" value="Hyderabad">Hyderabad<br>  
-            <input type="checkbox" onchange=check(this) id="city2" name="city" value="Mumbai">Mumbai<br>  
-            <input type="checkbox" onchange=check(this) id="city3" name="city" value="Delhi">Delhi*@  
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

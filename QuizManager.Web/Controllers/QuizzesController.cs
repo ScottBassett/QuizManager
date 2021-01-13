@@ -13,6 +13,7 @@ namespace QuizManager.Web.Controllers
     public class QuizzesController : Controller
     {
         private readonly QuizManagerDbContext _context;
+        int playerScore = 0;
 
         public QuizzesController(QuizManagerDbContext context)
         {
@@ -44,7 +45,7 @@ namespace QuizManager.Web.Controllers
                 Questions = questions,
             };
 
-
+            TempData["quizId"] = quiz.Id;
             return View(quizDetailsViewModel);
         }
 
@@ -152,6 +153,35 @@ namespace QuizManager.Web.Controllers
         private bool QuizExists(int id)
         {
             return _context.Quizzes.Any(e => e.Id == id);
+        }
+
+        // GET: Quizzes/PlayQuiz/5
+        public async Task<IActionResult> PlayQuiz(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var quiz = await _context.Quizzes.FirstOrDefaultAsync(q => q.Id == id);
+            var questions = _context.Questions
+                .Where(x => x.QuizId == id)
+                .Include(x => x.AllAnswers);
+
+            var playQuizViewModel = new PlayQuizViewModel
+            {
+                Quiz = quiz,
+                Questions = questions,
+                PlayerScore = playerScore
+            };
+
+
+            
+
+            TempData["quizId"] = quiz.Id;
+            return View(playQuizViewModel);
+        }
+
+        public void IncreaseScore()
+        {
+            playerScore++;
         }
     }
 }

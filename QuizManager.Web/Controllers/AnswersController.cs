@@ -65,7 +65,7 @@ namespace QuizManager.Web.Controllers
                 await _context.AddRangeAsync(model.Answers);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Quizzes");
             }
             
             return View(model);
