@@ -8,16 +8,3 @@ function check(el) {
         }
     }
 };
-
-
-
-
-//function check(el) {
-//    var checkBoxes = document.getElementsByClassName("correct-answer-checkbox");
-//    checkBoxes.forEach(function (item) {
-//        if (item != el) {
-//            console.log(item);
-//            item.checked = false;
-//        }
-//    });
-//}
