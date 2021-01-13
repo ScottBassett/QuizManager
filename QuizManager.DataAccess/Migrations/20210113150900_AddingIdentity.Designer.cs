@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QuizManager.DataAccess;
@@ -9,9 +10,10 @@ using QuizManager.DataAccess;
 namespace QuizManager.DataAccess.Migrations
 {
     [DbContext(typeof(QuizManagerDbContext))]
-    partial class QuizManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210113150900_AddingIdentity")]
+    partial class AddingIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

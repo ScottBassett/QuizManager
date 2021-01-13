@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess.Models;
 
 namespace QuizManager.DataAccess
 {
-    public class QuizManagerDbContext : DbContext
+    public class QuizManagerDbContext : IdentityDbContext
     {
         public QuizManagerDbContext(DbContextOptions<QuizManagerDbContext> options) : base(options)
         { }
