@@ -2,9 +2,11 @@
 using Microsoft.Extensions.Logging;
 using QuizManager.Web.ViewModels;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuizManager.Web.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,11 +17,6 @@ namespace QuizManager.Web.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }

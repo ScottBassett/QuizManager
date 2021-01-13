@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess;
 using QuizManager.DataAccess.Models;
@@ -21,12 +20,14 @@ namespace QuizManager.Web.Controllers
         }
 
         // GET: Quizzes
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Quizzes.ToListAsync());
         }
 
         // GET: Quizzes/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,6 +51,7 @@ namespace QuizManager.Web.Controllers
         }
 
         // GET: Quizzes/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -58,6 +60,7 @@ namespace QuizManager.Web.Controllers
         // POST: Quizzes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,QuizName")] Quiz quiz)
         {
             if (ModelState.IsValid)
@@ -73,6 +76,7 @@ namespace QuizManager.Web.Controllers
         }
 
         // GET: Quizzes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +95,7 @@ namespace QuizManager.Web.Controllers
         // POST: Quizzes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,QuizName")] Quiz quiz)
         {
             if (id != quiz.Id)
@@ -122,6 +127,7 @@ namespace QuizManager.Web.Controllers
         }
 
         // GET: Quizzes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,6 +148,7 @@ namespace QuizManager.Web.Controllers
         // POST: Quizzes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var quiz = await _context.Quizzes.FindAsync(id);
@@ -171,9 +178,6 @@ namespace QuizManager.Web.Controllers
                 Questions = questions,
                 PlayerScore = playerScore
             };
-
-
-            
 
             TempData["quizId"] = quiz.Id;
             return View(playQuizViewModel);
