@@ -1,4 +1,5 @@
-﻿@model QuizDetailsViewModel
+﻿@inject SignInManager<IdentityUser> signInManager;
+@model QuizDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -22,20 +23,22 @@
                     <a asp-controller="Questions" asp-action="Details" asp-route-id="@question.Id">@Html.DisplayFor(modelItem => question.QuestionName)</a>
                 </td>
             </tr>
-
-            <tr>
-                <td>
-                    <h5>Answers</h5>
-                </td>
-            </tr>
-
-            @foreach (var answer in question.AllAnswers)
+            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("User")))
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => answer.AnswerName)
+                        <h5>Answers</h5>
                     </td>
                 </tr>
+
+                @foreach (var answer in question.AllAnswers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => answer.AnswerName)
+                        </td>
+                    </tr>
+                }
             }
         }
     </table>
@@ -45,7 +48,7 @@
     <a class="btn btn-primary" asp-controller="Questions" asp-action="Create">Add Question</a>
 </div>
 
-<br/>
+<br />
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Quiz.Id">Edit</a> |

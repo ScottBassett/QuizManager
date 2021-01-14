@@ -1,4 +1,5 @@
-﻿@model IEnumerable<QuizManager.DataAccess.Models.Quiz>
+﻿@inject SignInManager<IdentityUser> signInManager;
+@model IEnumerable<QuizManager.DataAccess.Models.Quiz>
 
 @{
     ViewData["Title"] = "Quizzes";
@@ -11,33 +12,38 @@
 </p>
 <table class="table">
     @*<thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.QuizName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>*@
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuizName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>*@
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.QuizName)
             </td>
 
             @* IF USER *@
+            
             <td>
                 <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">View Questions</a>
-                <a class="btn btn-success" asp-action="PlayQuiz" asp-route-id="@item.Id">Play Quiz</a>
+                @*<a class="btn btn-success" asp-action="PlayQuiz" asp-route-id="@item.Id">Play Quiz</a>*@
             </td>
+            
 
-            @* IF ADMIN *@
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            }
         </tr>
-}
+        }
     </tbody>
 </table>
