@@ -1,4 +1,5 @@
 ﻿@model QuestionDetailsViewModel
+@inject SignInManager<IdentityUser> signInManager;
 
 @{
     ViewData["Title"] = "Details";
@@ -30,7 +31,19 @@
     </dl>
     <p>@Html.DisplayFor(model => model.Answers.FirstOrDefault(x => x.IsCorrect).AnswerName)</p>
 </div>
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Question.Id">Edit</a> |
+        <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a> |
+        <a asp-action="Index">Back to Question List</a>
+    </div>
+}
+else
+{
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Question.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a> |
+    <a asp-action="Index">Back to Question List</a>
 </div>
+}
