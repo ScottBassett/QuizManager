@@ -50,8 +50,6 @@ namespace QuizManager.Web.Controllers
         }
 
         // POST: Questions/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,QuizId,QuestionName,CorrectAnswerId")] Question question)
@@ -83,32 +81,37 @@ namespace QuizManager.Web.Controllers
                 return NotFound();
             }
 
-            ViewData["Quiz"] = new SelectList(_context.Quizzes, "Id", "QuizName", TempData["quizId"]);
-            return View(question);
-        }
-
-        // POST: Questions/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,QuizId,QuestionName,CorrectAnswerId")] Question question)
-        {
-            if (id != question.Id)
+            var answers = await _context.Answers.Where(x => x.QuestionId == question.Id).ToListAsync();
+            if (!answers.Any())
             {
                 return NotFound();
             }
 
+            var quiz = await _context.Quizzes.FirstOrDefaultAsync(x => x.Id == question.QuizId);
+
+            ViewData["QuizName"] = quiz.QuizName;
+            return View( new EditQuestionViewModel
+            {
+                Question = question,
+                Answers = answers
+            });
+        }
+
+        // POST: Questions/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditQuestionViewModel model)
+        {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(question);
+                    _context.UpdateRange(model.Question, model.Answers);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!QuestionExists(question.Id))
+                    if (!QuestionExists(model.Question.Id))
                     {
                         return NotFound();
                     }
@@ -118,10 +121,10 @@ namespace QuizManager.Web.Controllers
                     }
                 }
 
-                TempData["questionId"] = question.Id;
+                TempData["questionId"] = model.Question.Id;
                 return RedirectToAction(nameof(Index));
             }
-            return View(question);
+            return View(model);
         }
 
         // GET: Questions/Delete/5
