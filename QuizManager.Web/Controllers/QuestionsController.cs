@@ -82,6 +82,8 @@ namespace QuizManager.Web.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["Quiz"] = new SelectList(_context.Quizzes, "Id", "QuizName", TempData["quizId"]);
             return View(question);
         }
 
@@ -115,6 +117,8 @@ namespace QuizManager.Web.Controllers
                         throw;
                     }
                 }
+
+                TempData["questionId"] = question.Id;
                 return RedirectToAction(nameof(Index));
             }
             return View(question);
