@@ -26,22 +26,22 @@ namespace QuizManager.Web.Controllers
         }
 
         // GET: Answers/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var answer = await _context.Answers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (answer == null)
-            {
-                return NotFound();
-            }
+        //    var answer = await _context.Answers
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (answer == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(answer);
-        }
+        //    return View(answer);
+        //}
 
         // GET: Answers/Create
         public IActionResult Create()
@@ -51,25 +51,25 @@ namespace QuizManager.Web.Controllers
         }
 
         // POST: Answers/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateAnswersViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                foreach (var answer in model.Answers)
-                {
-                    answer.QuestionId = model.QuestionId;
-                }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(CreateAnswersViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        foreach (var answer in model.Answers)
+        //        {
+        //            answer.QuestionId = model.QuestionId;
+        //        }
 
-                await _context.AddRangeAsync(model.Answers);
-                await _context.SaveChangesAsync();
+        //        await _context.AddRangeAsync(model.Answers);
+        //        await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Quizzes");
-            }
+        //        return RedirectToAction("Index", "Quizzes");
+        //    }
             
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         //// GET: Answers/Edit/5
         //public async Task<IActionResult> Edit(int? id)
@@ -123,37 +123,37 @@ namespace QuizManager.Web.Controllers
         //}
 
         // GET: Answers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var answer = await _context.Answers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (answer == null)
-            {
-                return NotFound();
-            }
+        //    var answer = await _context.Answers
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (answer == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(answer);
-        }
+        //    return View(answer);
+        ////}
 
-        // POST: Answers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var answer = await _context.Answers.FindAsync(id);
-            _context.Answers.Remove(answer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //// POST: Answers/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var answer = await _context.Answers.FindAsync(id);
+        //    _context.Answers.Remove(answer);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        private bool AnswerExists(int id)
-        {
-            return _context.Answers.Any(e => e.Id == id);
-        }
+        //private bool AnswerExists(int id)
+        //{
+        //    return _context.Answers.Any(e => e.Id == id);
+        //}
     }
 }

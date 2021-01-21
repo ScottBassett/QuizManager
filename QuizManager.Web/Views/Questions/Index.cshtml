@@ -1,4 +1,5 @@
-﻿@model IEnumerable<QuizManager.DataAccess.Models.Question>
+﻿@*@model IEnumerable<QuizManager.DataAccess.Models.Question>*@
+@model QuestionIndexViewModel
 @inject SignInManager<IdentityUser> signInManager;
 
 @{
@@ -16,30 +17,36 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.QuestionName)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Quiz
+        </th>
+        <th>
+            Question
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Questions)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuestionName)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionName)
+            </td>
 
-                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                {
-                    <td>
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Answers</a>
-                        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                }
-            </tr>
+            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+            {
+                <td>
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Answers</a>
+                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            }
+        </tr>
         }
     </tbody>
 </table>

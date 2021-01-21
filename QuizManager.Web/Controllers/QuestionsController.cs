@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess;
 using QuizManager.DataAccess.Models;
@@ -21,7 +22,16 @@ namespace QuizManager.Web.Controllers
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Questions.ToListAsync());
+            var questions = await _context.Questions.OrderBy(x => x.QuizId).ToListAsync();
+            var quizzes = await _context.Quizzes.ToListAsync();
+
+            var model = new QuestionIndexViewModel
+            {
+                Questions = questions,
+                Quizzes = quizzes
+            };
+
+            return View(model);
         }
 
         // GET: Questions/Details/5
@@ -81,7 +91,10 @@ namespace QuizManager.Web.Controllers
                 return NotFound();
             }
 
-            var answers = await _context.Answers.Where(x => x.QuestionId == question.Id).ToListAsync();
+            var answers = await _context.Answers
+                .Where(x => x.QuestionId == question.Id)
+                .ToListAsync();
+
             if (!answers.Any())
             {
                 return NotFound();
@@ -106,7 +119,8 @@ namespace QuizManager.Web.Controllers
             {
                 try
                 {
-                    _context.UpdateRange(model.Question, model.Answers);
+                    _context.Update(model.Question);
+                    _context.UpdateRange(model.Answers);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
