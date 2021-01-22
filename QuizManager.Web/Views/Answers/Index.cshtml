@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<QuizManager.DataAccess.Models.Answer>
-@inject SignInManager<IdentityUser> signInManager;
 
 @{
     ViewData["Title"] = "Index";
@@ -23,14 +22,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AnswerName)
                 </td>
-                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                {
-                    <td>
-                        @*<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a>*@
-                        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                }
             </tr>
         }
     </tbody>

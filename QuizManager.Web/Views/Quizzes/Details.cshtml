@@ -22,8 +22,11 @@
                 {
                     <td>
                         <a class="btn btn-primary" asp-controller="Questions" asp-action="Details" asp-route-id="@question.Id">View Answers</a>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
                         <a class="btn btn-secondary" asp-controller="Questions" asp-action="Edit" asp-route-id="@question.Id">Edit</a>
-                        <a class="btn btn-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id">Delete</a>
+                            <a class="btn btn-danger" asp-controller="Questions" asp-action="Delete" asp-route-id="@question.Id">Delete</a>
+                        }
                     </td>
                 }
             </tr>
@@ -31,15 +34,10 @@
     </table>
 </div>
 
+<div>
 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
-    <div>
-        <a class="btn btn-outline-primary" asp-controller="Questions" asp-action="Create">Add Question</a>
-    </div>
+    <a class="btn btn-outline-primary" asp-controller="Questions" asp-action="Create">Add Question</a>
 }
-
-<br />
-
-<div>
-    <a asp-action="Index">Back to Quiz List</a>
+    <a class="btn btn-outline-secondary" asp-action="Index">Back to Quiz List</a>
 </div>

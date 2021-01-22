@@ -32,18 +32,11 @@
     <p>@Html.DisplayFor(model => model.Answers.FirstOrDefault(x => x.IsCorrect).AnswerName)</p>
 </div>
 
-@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-{
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Question.Id">Edit</a> |
-    <a asp-controller="Quizzes" asp-action="Details" asp-route-id="@Model.Question.QuizId">Back to Questions</a> |
-    <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a>
+    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.Question.Id">Edit</a>
+    }
+    <a class="btn btn-outline-secondary" asp-controller="Quizzes" asp-action="Details" asp-route-id="@Model.Question.QuizId">Back to Questions</a>
 </div>
-}
-else
-{
-<div>
-    <a asp-controller="Quizzes" asp-action="Details" asp-route-id="@Model.Question.QuizId">Back to Questions</a> |
-    <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a>
-</div>
-}

@@ -22,14 +22,11 @@
                 <span asp-validation-for="QuestionName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" /> 
+                <a class="btn btn-outline-secondary" asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a>
 </div>
 
 @section Scripts {

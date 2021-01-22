@@ -20,37 +20,37 @@ namespace QuizManager.Web.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet]
-        public IActionResult CreateRole()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult CreateRole()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var identityRole = new IdentityRole
-                {
-                    Name = model.RoleName
-                };
+        //[HttpPost]
+        //public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var identityRole = new IdentityRole
+        //        {
+        //            Name = model.RoleName
+        //        };
 
-                var result = await _roleManager.CreateAsync(identityRole);
+        //        var result = await _roleManager.CreateAsync(identityRole);
 
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("ListRoles", "Administration");
-                }
+        //        if (result.Succeeded)
+        //        {
+        //            return RedirectToAction("ListRoles", "Administration");
+        //        }
 
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-            }
+        //        foreach (var error in result.Errors)
+        //        {
+        //            ModelState.AddModelError("", error.Description);
+        //        }
+        //    }
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)

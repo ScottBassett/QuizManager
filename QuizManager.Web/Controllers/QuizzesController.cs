@@ -12,7 +12,6 @@ namespace QuizManager.Web.Controllers
     public class QuizzesController : Controller
     {
         private readonly QuizManagerDbContext _context;
-        int playerScore = 0;
 
         public QuizzesController(QuizManagerDbContext context)
         {
@@ -23,7 +22,7 @@ namespace QuizManager.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Quizzes.ToListAsync());
+            return View(await _context.Quizzes.OrderBy(q => q.Id).ToListAsync());
         }
 
         // GET: Quizzes/Details/5
@@ -162,30 +161,30 @@ namespace QuizManager.Web.Controllers
             return _context.Quizzes.Any(e => e.Id == id);
         }
 
-        // GET: Quizzes/PlayQuiz/5
-        public async Task<IActionResult> PlayQuiz(int? id)
-        {
-            if (id == null) return NotFound();
+        //// GET: Quizzes/PlayQuiz/5
+        //public async Task<IActionResult> PlayQuiz(int? id)
+        //{
+        //    if (id == null) return NotFound();
 
-            var quiz = await _context.Quizzes.FirstOrDefaultAsync(q => q.Id == id);
-            var questions = _context.Questions
-                .Where(x => x.QuizId == id)
-                .Include(x => x.AllAnswers);
+        //    var quiz = await _context.Quizzes.FirstOrDefaultAsync(q => q.Id == id);
+        //    var questions = _context.Questions
+        //        .Where(x => x.QuizId == id)
+        //        .Include(x => x.AllAnswers);
 
-            var playQuizViewModel = new PlayQuizViewModel
-            {
-                Quiz = quiz,
-                Questions = questions,
-                PlayerScore = playerScore
-            };
+        //    var playQuizViewModel = new PlayQuizViewModel
+        //    {
+        //        Quiz = quiz,
+        //        Questions = questions,
+        //        PlayerScore = playerScore
+        //    };
 
-            TempData["quizId"] = quiz.Id;
-            return View(playQuizViewModel);
-        }
+        //    TempData["quizId"] = quiz.Id;
+        //    return View(playQuizViewModel);
+        //}
 
-        public void IncreaseScore()
-        {
-            playerScore++;
-        }
+        //public void IncreaseScore()
+        //{
+        //    playerScore++;
+        //}
     }
 }

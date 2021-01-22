@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
 using QuizManager.DataAccess;
 using QuizManager.DataAccess.Models;
@@ -22,16 +21,7 @@ namespace QuizManager.Web.Controllers
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-            var questions = await _context.Questions.OrderBy(x => x.QuizId).ToListAsync();
-            var quizzes = await _context.Quizzes.ToListAsync();
-
-            var model = new QuestionIndexViewModel
-            {
-                Questions = questions,
-                Quizzes = quizzes
-            };
-
-            return View(model);
+            return View(await _context.Quizzes.Include(q => q.Questions).ToListAsync());
         }
 
         // GET: Questions/Details/5
@@ -136,7 +126,7 @@ namespace QuizManager.Web.Controllers
                 }
 
                 TempData["questionId"] = model.Question.Id;
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Quizzes");
             }
             return View(model);
         }
@@ -167,7 +157,7 @@ namespace QuizManager.Web.Controllers
             var question = await _context.Questions.FindAsync(id);
             _context.Questions.Remove(question);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Quizzes");
         }
 
         private bool QuestionExists(int id)
