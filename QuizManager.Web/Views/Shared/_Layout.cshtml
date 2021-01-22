@@ -27,8 +27,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Questions" asp-action="Index">All Questions</a>
                         </li>
 
-                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                        {
+                        @*@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {*@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,7 +41,7 @@
                                        asp-action="ListRoles">Roles</a>
                                 </div>
                             </li>
-                        }
+                        
                     </ul>
                 </div>
                 <ul class="navbar-nav flex-grow-1 ml-auto">

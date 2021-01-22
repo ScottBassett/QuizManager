@@ -16,20 +16,22 @@ namespace QuizManager.DataAccess
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
+        //    base.OnModelCreating(modelBuilder);
+
         //    modelBuilder.Entity<Quiz>().HasData(new Quiz
         //    {
         //        Id = 1,
         //        QuizName = "Sports"
         //    });
 
-        //    modelBuilder.Entity<Question>().HasData(new Question
+        //    modelBuilder.Entity<Question>().HasData(new 
         //    {
         //        Id = 1,
         //        QuestionName = "What is the only sport to be played on the moon?",
         //        QuizId = 1
         //    });
 
-        //    modelBuilder.Entity<Answer>().HasData(new Answer
+        //    modelBuilder.Entity<Answer>().HasData(new 
         //    {
         //        Id = 1,
         //        QuestionId = 1,
@@ -37,7 +39,7 @@ namespace QuizManager.DataAccess
         //        IsCorrect = false
         //    });
 
-        //    modelBuilder.Entity<Answer>().HasData(new Answer
+        //    modelBuilder.Entity<Answer>().HasData(new 
         //    {
         //        Id = 2,
         //        QuestionId = 1,
@@ -45,7 +47,7 @@ namespace QuizManager.DataAccess
         //        IsCorrect = false
         //    });
 
-        //    modelBuilder.Entity<Answer>().HasData(new Answer
+        //    modelBuilder.Entity<Answer>().HasData(new 
         //    {
         //        Id = 3,
         //        QuestionId = 1,
@@ -53,7 +55,7 @@ namespace QuizManager.DataAccess
         //        IsCorrect = false
         //    });
 
-        //    modelBuilder.Entity<Answer>().HasData(new Answer
+        //    modelBuilder.Entity<Answer>().HasData(new 
         //    {
         //        Id = 4,
         //        QuestionId = 1,
@@ -61,7 +63,5 @@ namespace QuizManager.DataAccess
         //        IsCorrect = true
         //    });
         //}
-
-        
     }
 }

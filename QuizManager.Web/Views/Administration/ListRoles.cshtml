@@ -8,6 +8,10 @@
 
 @if (Model.Any())
 {
+    <a class="btn btn-primary mb-3" asp-controller="Administration" asp-action="CreateRole">
+        Add new role
+    </a>
+
     foreach (var role in Model)
     {
         <div class="card mb-3">

@@ -8,7 +8,7 @@ using QuizManager.Web.ViewModels;
 
 namespace QuizManager.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -20,37 +20,37 @@ namespace QuizManager.Web.Controllers
             _userManager = userManager;
         }
 
-        //[HttpGet]
-        //public IActionResult CreateRole()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult CreateRole()
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var identityRole = new IdentityRole
-        //        {
-        //            Name = model.RoleName
-        //        };
+        [HttpPost]
+        public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var identityRole = new IdentityRole
+                {
+                    Name = model.RoleName
+                };
 
-        //        var result = await _roleManager.CreateAsync(identityRole);
+                var result = await _roleManager.CreateAsync(identityRole);
 
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("ListRoles", "Administration");
-        //        }
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles", "Administration");
+                }
 
-        //        foreach (var error in result.Errors)
-        //        {
-        //            ModelState.AddModelError("", error.Description);
-        //        }
-        //    }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
@@ -80,34 +80,34 @@ namespace QuizManager.Web.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> EditRole(EditRoleViewModel model)
-        //{
-        //    var role = await _roleManager.FindByIdAsync(model.Id);
+        [HttpPost]
+        public async Task<IActionResult> EditRole(EditRoleViewModel model)
+        {
+            var role = await _roleManager.FindByIdAsync(model.Id);
 
-        //    if (role == null)
-        //    {
-        //        ViewBag.ErrorMessage = $"Role with Id = {model.Id} cannot be found";
-        //        return View("NotFound");
-        //    }
-        //    else
-        //    {
-        //        role.Name = model.RoleName;
-        //        var result = await _roleManager.UpdateAsync(role);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {model.Id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                role.Name = model.RoleName;
+                var result = await _roleManager.UpdateAsync(role);
 
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("ListRoles");
-        //        }
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
 
-        //        foreach (var error in result.Errors)
-        //        {
-        //            ModelState.AddModelError("", error.Description);
-        //        }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
 
-        //        return View(model);
-        //    }
-        //}
+                return View(model);
+            }
+        }
 
         [HttpGet]
         public IActionResult ListRoles()
