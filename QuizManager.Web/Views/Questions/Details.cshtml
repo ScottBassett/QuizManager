@@ -34,16 +34,16 @@
 
 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 {
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Question.Id">Edit</a> |
-        <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a> |
-        <a asp-action="Index">Back to Question List</a>
-    </div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Question.Id">Edit</a> |
+    <a asp-controller="Quizzes" asp-action="Details" asp-route-id="@Model.Question.QuizId">Back to Questions</a> |
+    <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a>
+</div>
 }
 else
 {
 <div>
-    <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a> |
-    <a asp-action="Index">Back to Question List</a>
+    <a asp-controller="Quizzes" asp-action="Details" asp-route-id="@Model.Question.QuizId">Back to Questions</a> |
+    <a asp-controller="Quizzes" asp-action="Index">Back to Quiz List</a>
 </div>
 }

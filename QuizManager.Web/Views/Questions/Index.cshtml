@@ -1,19 +1,11 @@
-﻿@*@model IEnumerable<QuizManager.DataAccess.Models.Question>*@
-@model QuestionIndexViewModel
+﻿@model QuestionIndexViewModel
 @inject SignInManager<IdentityUser> signInManager;
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Questions</h1>
-
-@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-{
-    <p>
-        <a class="btn btn-outline-primary" asp-action="Create">Create New Question</a>
-    </p>
-}
+<h1>All Questions</h1>
 
 <table class="table">
     <thead>
@@ -40,11 +32,11 @@
 
             @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
             {
-                <td>
-                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Answers</a>
-                    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
+        <td>
+            <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Answers</a>
+            <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
             }
         </tr>
         }
